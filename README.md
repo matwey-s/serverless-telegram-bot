@@ -5,6 +5,7 @@ This example demonstrates how to setup an echo Telegram Bot using the Serverless
 
 ### What do I need?
 - A AWS key configured locally, see [here](https://serverless.com/framework/docs/providers/aws/guide/credentials/).
+- Python 3.7.
 - NodeJS. I tested with v8.9.0.
 - A Telegram account.
 
@@ -15,6 +16,9 @@ $ npm install serverless -g
 
 # Install the necessary plugins
 $ npm install
+
+# Create and active a Python 3.7 venv
+$ python3.7 -m venv venv && souce venv/bin/activate
 
 # Get a bot from Telegram, sending this message to @BotFather
 $ /newbot

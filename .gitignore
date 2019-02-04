@@ -163,3 +163,4 @@ typings/
 
 # Token file
 serverless.env.yml
+.serverless
