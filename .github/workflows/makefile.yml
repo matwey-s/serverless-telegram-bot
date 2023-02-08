@@ -30,7 +30,7 @@ jobs:
         ls -la
         ls -la serverless-telegram-bot
         cp -r serverless-telegram-bot matwey-s/folder
-        git -C matwey-s add serverless
+#        git -C matwey-s add serverless
         
     - name: Delete src/codegen and types
       run: |
