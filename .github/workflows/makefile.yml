@@ -27,6 +27,8 @@ jobs:
         
     - name: Copy Proto Files
       run: |
+        ls -la
+        ls -la serverless-telegram-bot
         cp -r serverless-telegram-bot/serverless.yml matwey-s/folder
         git -C matwey-s add serverless.yml
         
