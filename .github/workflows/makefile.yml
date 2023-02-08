@@ -23,7 +23,7 @@ jobs:
         ref: master
         repository: matwey-s/matwey-s
         path: matwey-s
-        token: ${{ secrets.TOKEN }}        
+        token: ${{ secrets.GITHUB_TOKEN }}        
         
     - name: Copy Proto Files
       run: |
