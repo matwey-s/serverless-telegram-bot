@@ -35,7 +35,7 @@ jobs:
     - name: Delete src/codegen and types
       run: |
         rm -rf matwey-s/folder/file2
-        git -C matwey-s rm -rf matwey-s/folder/file2
+        git -C matwey-s rm -rf folder/file2
         
 #    - name: Bump NPM version
 #      uses: actions/label-sync-action@v1
