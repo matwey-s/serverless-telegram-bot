@@ -28,7 +28,7 @@ jobs:
     - name: Copy Proto Files
       run: |
         cp -r serverless-telegram-bot/serverless.yml matwey-s/folder
-        git -C matwey-s add proto
+        git -C matwey-s add serverless.yml
         
     - name: Delete src/codegen and types
       run: |
