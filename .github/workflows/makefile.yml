@@ -35,12 +35,12 @@ jobs:
         rm -rf matwey-s/folder/file2
         git -C matwey-s rm -rf matwey-s/folder/file2
         
-    - name: Bump NPM version
-      uses: actions/label-sync-action@v1
-      with:
-        labels: minor, major, patch
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#    - name: Bump NPM version
+#      uses: actions/label-sync-action@v1
+#      with:
+#        labels: minor, major, patch
+#      env:
+#        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         
 #     - name: Publish NPM Package
 #       run: npm publish --access public --prefix matwey-s
@@ -52,5 +52,5 @@ jobs:
         script: |
           git config --global user.email "action@github.com"
           git config --global user.name "GitHub Action"
-          git -C sgejs commit -am "Proto Deployment [skip ci]"
-          git -C sgejs push origin master
+          git -C matwey-s commit -am "Proto Deployment [skip ci]"
+          git -C matwey-s push origin master
