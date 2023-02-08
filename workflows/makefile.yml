@@ -1,0 +1,56 @@
+name: Deploy to private repo
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout source repository
+      uses: actions/checkout@v2
+      with:
+        ref: master
+        repository: matwey-s/serverless-telegram-bot
+        path: serverless-telegram-bot
+        
+    - name: Checkout destination repository
+      uses: actions/checkout@v2
+      with:
+        ref: master
+        repository: matwey-s/matwey-s
+        path: matwey-s
+        token: ${{ secrets.TOKEN }}        
+        
+    - name: Copy Proto Files
+      run: |
+        cp -r serverless-telegram-bot/serverless.yml matwey-s/folder
+        git -C matwey-s add proto
+        
+    - name: Delete src/codegen and types
+      run: |
+        rm -rf matwey-s/folder/file2
+        git -C matwey-s rm -rf matwey-s/folder/file2
+        
+    - name: Bump NPM version
+      uses: actions/label-sync-action@v1
+      with:
+        labels: minor, major, patch
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        
+#     - name: Publish NPM Package
+#       run: npm publish --access public --prefix matwey-s
+      
+    - name: Commit and Push Changes
+      uses: actions/github-script@v6
+      with:
+        github_token: ${{ secrets.TOKEN }} 
+        script: |
+          git config --global user.email "action@github.com"
+          git config --global user.name "GitHub Action"
+          git -C sgejs commit -am "Proto Deployment [skip ci]"
+          git -C sgejs push origin master
