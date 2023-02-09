@@ -60,9 +60,9 @@ jobs:
 
     - name: Commit files
       run: |
-        git config   user.email "41898282+github-actions[bot]@users.noreply.github.com"
-        git config   user.name "github-actions[bot]"
-        git commit  -a -m "Add changes"
+        git -C matwey-s config   user.email "41898282+github-actions[bot]@users.noreply.github.com"
+        git -C matwey-s config   user.name "github-actions[bot]"
+        git -C matwey-s commit  -a -m "Add changes"
     - name: Push changes
       uses: ad-m/github-push-action@master
       with:
