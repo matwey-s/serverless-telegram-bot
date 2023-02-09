@@ -70,3 +70,4 @@ jobs:
         github_token: ${{ secrets.TOKEN }}
         branch: master
         directory: matwey-s
+        repository: matwey-s
