@@ -57,9 +57,13 @@ jobs:
 #           git -C matwey-s commit -am "Proto Deployment [skip ci]"
 #           git -C matwey-s push origin master
 
-    - name: Commit and Push Changes
+    - name: Commit files
+      run: |
+        git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
+        git config --local user.name "github-actions[bot]"
+        git commit -a -m "Add changes"
+    - name: Push changes
       uses: ad-m/github-push-action@master
       with:
         github_token: ${{ secrets.TOKEN }}
         branch: master
-        message: "Proto Deployment [skip ci]"
