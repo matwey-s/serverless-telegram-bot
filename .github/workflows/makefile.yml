@@ -4,9 +4,12 @@ on:
   push:
     branches:
       - master
+  pull_request:
+    types: [opened, edited, synchronize]
+
 
 jobs:
-  deploy:
+  checkout_and_proto_copy:
     runs-on: ubuntu-latest
     
     steps:
@@ -38,29 +41,32 @@ jobs:
         rm -rf matwey-s/folder/file2
         git -C matwey-s rm -rf folder/file2
         
-#    - name: Bump NPM version
-#      uses: actions/label-sync-action@v1
-#      with:
-#        labels: minor, major, patch
-#      env:
-#        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - name: Determine npm version
+      run: |
+          if [[ "${{ github.event.pull_request.title }}" == *"major"* ]]; then
+            echo "::set-env name=NPM_VERSION::major"
+          elif [[ "${{ github.event.pull_request.title }}" == *"minor"* ]]; then
+            echo "::set-env name=NPM_VERSION::minor"
+          elif [[ "${{ github.event.pull_request.title }}" == *"patch"* ]]; then
+            echo "::set-env name=NPM_VERSION::patch"
+          fi
+
+    - name: Bump npm version
+      run: |
+          if [ "${{ env.NPM_VERSION }}" == "major" ]; then
+            npm version major
+          elif [ "${{ env.NPM_VERSION }}" == "minor" ]; then
+            npm version minor
+          elif [ "${{ env.NPM_VERSION }}" == "patch" ]; then
+            npm version patch
+          fi
+
         
 #     - name: Publish NPM Package
 #       run: npm publish --access public --prefix matwey-s
       
-#     - name: Commit and Push Changes
-#       uses: actions/github-script@v6.4.0
-#       with:
-#         github-token: ${{ secrets.TOKEN }}        
-#         script: |
-#           git config --global user.email "matwey-s@github.com"
-#           git config --global user.name "Matvei Sysun"
-#           git -C matwey-s commit -am "Proto Deployment [skip ci]"
-#           git -C matwey-s push origin master
-
-    - name: Commit files
+    - name: Commit files & push
       run: |
-        find .
         git -C matwey-s config   user.email "41898282+github-actions[bot]@users.noreply.github.com"
         git -C matwey-s config   user.name "github-actions[bot]"
         git -C matwey-s commit  -a -m "Add changes"
