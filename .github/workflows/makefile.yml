@@ -47,14 +47,19 @@ jobs:
 #     - name: Publish NPM Package
 #       run: npm publish --access public --prefix matwey-s
       
+#     - name: Commit and Push Changes
+#       uses: actions/github-script@v6.4.0
+#       with:
+#         github-token: ${{ secrets.TOKEN }}        
+#         script: |
+#           git config --global user.email "matwey-s@github.com"
+#           git config --global user.name "Matvei Sysun"
+#           git -C matwey-s commit -am "Proto Deployment [skip ci]"
+#           git -C matwey-s push origin master
+
     - name: Commit and Push Changes
-      uses: actions/github-script@v6.4.0
-#      env:
-#        GITHUB_TOKEN: ${{ secrets.TOKEN }}   
+      uses: ad-m/github-push-action@v0.2.0
       with:
-        github-token: ${{ secrets.TOKEN }}        
-        script: |
-          git config --global user.email "matwey-s@github.com"
-          git config --global user.name "Matvei Sysun"
-          git -C matwey-s commit -am "Proto Deployment [skip ci]"
-          git -C matwey-s push origin master
+        github_token: ${{ secrets.TOKEN }}
+        branch: master
+        message: "Proto Deployment [skip ci]"
