@@ -54,7 +54,7 @@ jobs:
       with:
         github-token: ${{ secrets.TOKEN }}        
         script: |
-          git config --global user.email "action@github.com"
-          git config --global user.name "GitHub Action"
+          git config --global user.email "matwey-s@github.com"
+          git config --global user.name "Matvei Sysun"
           git -C matwey-s commit -am "Proto Deployment [skip ci]"
           git -C matwey-s push origin master
