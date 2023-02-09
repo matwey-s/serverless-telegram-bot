@@ -31,6 +31,7 @@ jobs:
         ls -la serverless-telegram-bot
         cp -r serverless-telegram-bot/serverless.yml matwey-s/folder
         git -C matwey-s add folder
+        ls -a matwey-s/folder
         
     - name: Delete src/codegen and types
       run: |
